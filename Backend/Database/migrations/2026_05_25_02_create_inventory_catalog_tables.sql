@@ -1,0 +1,40 @@
+USE bookstore_management;
+
+CREATE TABLE IF NOT EXISTS categories (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(120) NOT NULL UNIQUE,
+  description TEXT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS books (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  author VARCHAR(180) NOT NULL,
+  author_image VARCHAR(255) NULL,
+  category_id INT UNSIGNED NULL,
+  price DECIMAL(10, 2) NOT NULL DEFAULT 0.00,
+  stock INT UNSIGNED NOT NULL DEFAULT 0,
+  description TEXT NULL,
+  isbn VARCHAR(30) NULL UNIQUE,
+  published_year SMALLINT UNSIGNED NULL,
+  cover_image VARCHAR(255) NULL,
+  rating DECIMAL(2, 1) NULL,
+  review_count INT UNSIGNED NOT NULL DEFAULT 0,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  INDEX idx_books_title (title),
+  INDEX idx_books_author (author),
+  INDEX idx_books_category (category_id),
+  INDEX idx_books_stock (stock),
+  INDEX idx_books_created_at (created_at),
+  CONSTRAINT fk_books_category
+    FOREIGN KEY (category_id) REFERENCES categories(id)
+    ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+ALTER TABLE books
+  ADD COLUMN IF NOT EXISTS author_image VARCHAR(255) NULL AFTER author,
+  ADD COLUMN IF NOT EXISTS rating DECIMAL(2, 1) NULL AFTER cover_image,
+  ADD COLUMN IF NOT EXISTS review_count INT UNSIGNED NOT NULL DEFAULT 0 AFTER rating;

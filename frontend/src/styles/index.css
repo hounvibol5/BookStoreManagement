@@ -1,0 +1,119 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #2563eb;
+  --color-primary-light: #dbeafe;
+  --color-primary-dark: #1d4ed8;
+  --color-accent: #0ea5e9;
+  --color-dark: #1e293b;
+  --color-surface: #f0f7ff;
+  --color-card: #ffffff;
+  --color-border: #bfdbfe;
+  --color-muted: #64748b;
+  --font-display: "Kantumruy Pro", sans-serif;
+  --font-body: "Kantumruy Pro", sans-serif;
+}
+
+@layer base {
+  html,
+  body {
+    font-family: var(--font-body);
+  }
+
+  body {
+    background-color: #f0f7ff;
+    color: #1e293b;
+  }
+
+  #root {
+    min-height: 100vh;
+    font-family: inherit;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary text-white font-semibold px-5 py-2.5 rounded-xl shadow-md hover:bg-primary-dark transition-all duration-200;
+  }
+  .btn-outline {
+    @apply border-2 border-primary text-primary px-5 py-2.5 rounded-xl hover:bg-primary hover:text-white transition-all duration-200 font-semibold;
+  }
+  .card {
+    @apply bg-card border border-border rounded-2xl p-5 shadow-sm hover:shadow-md transition-all duration-200;
+  }
+  .input {
+    @apply bg-white border-2 border-border text-dark rounded-xl px-4 py-2.5 w-full focus:outline-none focus:border-primary transition placeholder-muted shadow-sm;
+  }
+}
+
+@layer utilities {
+  @keyframes glowPulse {
+    0%,
+    100% {
+      box-shadow: 0 0 0 rgba(59, 130, 246, 0.18);
+    }
+    50% {
+      box-shadow: 0 0 22px rgba(59, 130, 246, 0.35);
+    }
+  }
+
+  .animate-input-glow {
+    animation: glowPulse 2.4s ease-in-out infinite;
+  }
+
+  @keyframes bgPan {
+    0% {
+      background-position: center top;
+      transform: scale(1) translateZ(0);
+    }
+    50% {
+      background-position: center center;
+      transform: scale(1.02) translateZ(0);
+    }
+    100% {
+      background-position: center top;
+      transform: scale(1) translateZ(0);
+    }
+  }
+
+  .hero-bg-animate {
+    background-size: 140% 140%;
+    animation: bgPan 30s ease-in-out infinite;
+  }
+
+  @keyframes aboutCardFloat {
+    0%,
+    100% {
+      transform: translateY(0) scale(1);
+    }
+    50% {
+      transform: translateY(-16px) scale(1.025);
+    }
+  }
+
+  .about-card-float {
+    animation: aboutCardFloat 4.8s ease-in-out infinite;
+    will-change: transform;
+  }
+
+  .text-3d {
+    text-shadow:
+      0 1px 0 rgba(0, 0, 0, 0.08),
+      0 2px 0 rgba(0, 0, 0, 0.06),
+      0 4px 12px rgba(0, 0, 0, 0.18);
+    transform: translateZ(0);
+  }
+}
