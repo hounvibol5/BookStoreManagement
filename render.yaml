@@ -1,5 +1,18 @@
 services:
   - type: web
+    name: bookstore-frontend
+    runtime: static
+    buildCommand: cd frontend && npm ci && npm run build
+    staticPublishPath: ./frontend/dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://bookstore-api-1y53.onrender.com
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+
+  - type: web
     name: bookstore-api
     runtime: docker
     plan: free
