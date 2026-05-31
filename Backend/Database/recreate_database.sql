@@ -2,6 +2,10 @@
 -- WARNING: This deletes the existing bookstore_management database first.
 -- Use this when the database was dropped/broken and you want a clean rebuild.
 
+SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci;
+SET time_zone = '+00:00';
+SET FOREIGN_KEY_CHECKS = 0;
+
 DROP DATABASE IF EXISTS bookstore_management;
 
 CREATE DATABASE bookstore_management
@@ -314,3 +318,5 @@ VALUES
   (6, 'A Brief History of Time', 'Stephen Hawking', NULL, 3, 14.99, 25, 'From the Big Bang to black holes - science for everyone.', '9780553380163', 1988, NULL, 4.4, 98),
   (7, 'To Kill a Mockingbird', 'Harper Lee', NULL, 1, 13.99, 35, 'A powerful story of racial injustice and moral growth in the American South.', '9780061935466', 1960, NULL, 4.8, 231),
   (8, 'The Power of Now', 'Eckhart Tolle', NULL, 5, 15.99, 0, 'A guide to spiritual enlightenment and living in the present moment.', '9781577314806', 1997, NULL, 4.3, 87);
+
+SET FOREIGN_KEY_CHECKS = 1;

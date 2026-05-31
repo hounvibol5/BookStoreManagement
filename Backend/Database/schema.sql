@@ -1,6 +1,11 @@
 -- BookStore Management complete database setup.
 -- Run this one file to create/update the database, tables, views, and seed data.
 -- This script is non-destructive: it keeps existing data and updates seed rows by id.
+-- Safe for Render MySQL first boot and for manual re-runs.
+
+SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci;
+SET time_zone = '+00:00';
+SET FOREIGN_KEY_CHECKS = 0;
 
 CREATE DATABASE IF NOT EXISTS bookstore_management
   CHARACTER SET utf8mb4
@@ -340,3 +345,5 @@ ON DUPLICATE KEY UPDATE
   cover_image = VALUES(cover_image),
   rating = VALUES(rating),
   review_count = VALUES(review_count);
+
+SET FOREIGN_KEY_CHECKS = 1;
