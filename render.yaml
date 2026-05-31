@@ -6,7 +6,7 @@ services:
     region: singapore
     dockerfilePath: ./Backend/API/Dockerfile
     dockerContext: .
-    healthCheckPath: /
+    healthCheckPath: /health.php
     envVars:
       - key: DB_HOST
         sync: false
