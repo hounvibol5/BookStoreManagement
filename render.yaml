@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: bookstore-api
+    runtime: docker
+    plan: free
+    region: singapore
+    dockerfilePath: ./Backend/API/Dockerfile
+    dockerContext: .
+    healthCheckPath: /
+    envVars:
+      - key: DB_HOST
+        sync: false
+      - key: DB_PORT
+        value: "3306"
+      - key: DB_NAME
+        value: bookstore_management
+      - key: DB_USER
+        sync: false
+      - key: DB_PASS
+        sync: false

@@ -180,6 +180,69 @@ mysqldump -u bookstore_app -p bookstore_management > /var/backups/bookstore/book
 
 Add it to cron after confirming the command works.
 
+## Deploy Backend API on Render
+
+Render does not provide a native PHP runtime, so this repo deploys the PHP API with Docker.
+
+Files added for Render:
+
+```text
+Backend/API/Dockerfile
+.dockerignore
+render.yaml
+```
+
+### Option A: Deploy with `render.yaml`
+
+1. Push this repo to GitHub.
+2. In Render, create a new Blueprint from the repo.
+3. Render will read `render.yaml` and create the `bookstore-api` web service.
+4. When prompted, enter these environment variables:
+
+```text
+DB_HOST=your-mysql-host
+DB_PORT=3306
+DB_NAME=bookstore_management
+DB_USER=your-mysql-user
+DB_PASS=your-mysql-password
+```
+
+### Option B: Deploy Manually in the Render Dashboard
+
+Create a new Web Service with these settings:
+
+```text
+Runtime: Docker
+Dockerfile Path: ./Backend/API/Dockerfile
+Docker Context: .
+Region: Singapore
+Health Check Path: /
+```
+
+Add the same database environment variables listed above.
+
+### Database
+
+This backend requires MySQL or MariaDB. Use a hosted MySQL provider, or run MySQL as a separate Render service and import:
+
+```text
+Backend/Database/schema.sql
+```
+
+After the backend deploys, test:
+
+```text
+https://your-render-service.onrender.com/
+https://your-render-service.onrender.com/books/get_books.php
+https://your-render-service.onrender.com/swagger/
+```
+
+If you deploy the frontend separately, set:
+
+```text
+VITE_API_URL=https://your-render-service.onrender.com
+```
+
 ## Shared Team Database
 
 Use this only when the team must connect to one central MySQL database. For normal development, local databases are safer and faster.
