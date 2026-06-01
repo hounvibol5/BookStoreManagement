@@ -65,11 +65,11 @@ function loadEnvFile(string $path): void
 loadEnvFile(__DIR__ . '/../.env');
 loadEnvFile(__DIR__ . '/../../../.env');
 
-$dbHost = getenv('DB_HOST') ?: '127.0.0.1';
-$dbPort = getenv('DB_PORT') ?: '3306';
-$dbName = getenv('DB_NAME') ?: 'bookstore_management';
+$dbHost = getenv('DB_HOST') ?: 'zephyr.proxy.rlwy.net';
+$dbPort = getenv('DB_PORT') ?: '29309';
+$dbName = getenv('DB_NAME') ?: 'railway';
 $dbUser = getenv('DB_USER') ?: 'root';
-$dbPass = getenv('DB_PASS') ?: '123456';
+$dbPass = getenv('DB_PASS') ?: 'dFKINZYbtHFswbdCfzVVTQGXqIlOSbqa';
 
 function getPDO(): PDO
 {
