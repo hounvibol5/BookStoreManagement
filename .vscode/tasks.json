@@ -4,15 +4,15 @@
     {
       "label": "App: Run backend",
       "type": "shell",
-      "command": "C:\\xampp\\php\\php.exe",
+      "command": "docker",
       "args": [
-        "-c",
-        "${workspaceFolder}\\Backend\\API\\php.ini",
-        "-S",
-        "localhost:8000"
+        "compose",
+        "up",
+        "--build",
+        "api"
       ],
       "options": {
-        "cwd": "${workspaceFolder}\\Backend\\API",
+        "cwd": "${workspaceFolder}",
         "shell": {
           "executable": "C:\\Windows\\System32\\cmd.exe",
           "args": [
@@ -22,6 +22,26 @@
         }
       },
       "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "App: Stop backend",
+      "type": "shell",
+      "command": "docker",
+      "args": [
+        "compose",
+        "down"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "shell": {
+          "executable": "C:\\Windows\\System32\\cmd.exe",
+          "args": [
+            "/d",
+            "/c"
+          ]
+        }
+      },
       "problemMatcher": []
     },
     {
