@@ -1,25 +1,4 @@
 services:
-  - type: pserv
-    name: bookstore-db
-    runtime: docker
-    plan: starter
-    region: singapore
-    dockerfilePath: ./Backend/Database/Dockerfile
-    dockerContext: .
-    envVars:
-      - key: MYSQL_DATABASE
-        value: bookstore_management
-      - key: MYSQL_USER
-        value: bookstore_app
-      - key: MYSQL_PASSWORD
-        generateValue: true
-      - key: MYSQL_ROOT_PASSWORD
-        generateValue: true
-    disk:
-      name: mysql-data
-      mountPath: /var/lib/mysql
-      sizeGB: 10
-
   - type: web
     name: bookstore-frontend
     runtime: static
@@ -43,18 +22,12 @@ services:
     healthCheckPath: /health.php
     envVars:
       - key: DB_HOST
-        fromService:
-          name: bookstore-db
-          type: pserv
-          property: host
+        sync: false
       - key: DB_PORT
-        value: "3306"
+        sync: false
       - key: DB_NAME
-        value: bookstore_management
+        sync: false
       - key: DB_USER
-        value: bookstore_app
+        sync: false
       - key: DB_PASS
-        fromService:
-          name: bookstore-db
-          type: pserv
-          envVarKey: MYSQL_PASSWORD
+        sync: false
